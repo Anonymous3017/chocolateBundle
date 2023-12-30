@@ -39,19 +39,20 @@
           totalPrice += productValue
 
           if(map[productName]===undefined){
-            map[productName] = productValue;
+            map[productName] = {productValue,quantity:parseInt(select.value)};
             const listItem = document.createElement('li');
             listItem.className = productName
-            listItem.textContent = `${productName} - $${productValue.toFixed(2)}`;
+            listItem.textContent = `${productName} - $${productValue.toFixed(2)} Qty ${select.value}`;
             selectedChocolates.appendChild(listItem);
 
           }
           else{
-              map[productName] = map[productName] + productValue;
+              map[productName].productValue+= productValue;
+              map[productName].quantity+=parseInt(select.value);
             for (let i = 0; i < listItems.length; i++) {
               const listItem = listItems[i];
               if(listItem.className === productName){
-                listItem.textContent = `${productName} - $${map[productName].toFixed(2)}`;
+                listItem.textContent = `${productName} - $${map[productName].productValue.toFixed(2)} Qty ${map[productName].quantity}`;
                 console.log(listItem.textContent);
 
               }
