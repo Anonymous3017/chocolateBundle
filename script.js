@@ -5,6 +5,8 @@
     const totalPriceElement = document.getElementById('total-price');
     const errorMessage = document.querySelector('.error-message');
 
+   
+
     let totalItems = 0;
     let totalPrice = 0;
     const maxItems = 8;
@@ -12,6 +14,7 @@
     let map = {};
 
     addToCartButtons.forEach(button => {
+
       button.addEventListener('click', () => {
         if (totalItems < maxItems) {
           const card = button.closest('.card');
@@ -19,24 +22,32 @@
           const productCost = parseFloat(card.querySelector('.product-cost').textContent.slice(1));
           const listItems = selectedChocolates.getElementsByTagName('li');
 
-          console.log(listItems)
-          
+          const select = card.children[1].children[1].children[1]
+
+         if(parseInt(select.value)+totalItems>maxItems){
+          errorMessage.textContent = 'Maximum items reached (8)';
+          return ;
+        }
+         
+         
+
+          let productValue = productCost*parseFloat(select.value); 
 
 
-          totalItems++;
-          totalPrice += productCost;
+
+          totalItems+=parseInt(select.value);
+          totalPrice += productValue
 
           if(map[productName]===undefined){
-            map[productName] = productCost;
+            map[productName] = productValue;
             const listItem = document.createElement('li');
             listItem.className = productName
-            listItem.textContent = `${productName} - $${productCost.toFixed(2)}`;
+            listItem.textContent = `${productName} - $${productValue.toFixed(2)}`;
             selectedChocolates.appendChild(listItem);
 
           }
           else{
-              map[productName] = map[productName] + productCost;
-              console.log(map[productName])
+              map[productName] = map[productName] + productValue;
             for (let i = 0; i < listItems.length; i++) {
               const listItem = listItems[i];
               if(listItem.className === productName){
@@ -50,24 +61,6 @@
           
           totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
           errorMessage.textContent = '';
-          
-
-          // console.log(listItems)
-          
-          // if(map[productName]!==undefined){
-          //   map[productName] = map[productName] + productCost;
-             
-          // }else{
-          //   map[productName] = productCost;
-            
-           
-          // }
-
-         
-
-
-
-          // Create a new list item and add it to the list
 
 
         } else {
@@ -101,3 +94,6 @@
   addButtonListeners();
       
 
+
+
+  console.log('script.js loaded');
