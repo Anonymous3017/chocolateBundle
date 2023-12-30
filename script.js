@@ -5,8 +5,6 @@
     const totalPriceElement = document.getElementById('total-price');
     const errorMessage = document.querySelector('.error-message');
 
-   
-
     let totalItems = 0;
     let totalPrice = 0;
     const maxItems = 8;
@@ -30,7 +28,7 @@
         }
          
          
-
+          // Quantity = select.value
           let productValue = productCost*parseFloat(select.value); 
 
 
@@ -43,7 +41,20 @@
             const listItem = document.createElement('li');
             listItem.className = productName
             listItem.textContent = `${productName} - $${productValue.toFixed(2)} Qty ${select.value}`;
+
             selectedChocolates.appendChild(listItem);
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'X';
+            removeButton.className = 'remove-button';
+            removeButton.addEventListener('click', () => {
+              totalItems -= map[productName].quantity;
+              totalPrice -= map[productName].productValue;
+              delete map[productName];
+              selectedChocolates.removeChild(listItem);
+              totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+            });
+            listItem.appendChild(removeButton);
 
           }
           else{
@@ -53,23 +64,32 @@
               const listItem = listItems[i];
               if(listItem.className === productName){
                 listItem.textContent = `${productName} - $${map[productName].productValue.toFixed(2)} Qty ${map[productName].quantity}`;
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'X';
+                removeButton.className = 'remove-button';
+                removeButton.addEventListener('click', () => {
+                  totalItems -= map[productName].quantity;
+                  totalPrice -= map[productName].productValue;
+                  delete map[productName];
+                  selectedChocolates.removeChild(listItem);
+                  totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+                });
+                listItem.appendChild(removeButton);
+
                 console.log(listItem.textContent);
 
               }
             }
           }
-          
-          
+              
           totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
           errorMessage.textContent = '';
-
-
         } else {
           errorMessage.textContent = 'Maximum items reached (8)';
         }
       });
     });
-
       const modal = document.getElementById('myModal');
       const closeButton = document.querySelector('.close');
     
@@ -93,8 +113,4 @@
   };
       
   addButtonListeners();
-      
-
-
-
   console.log('script.js loaded');

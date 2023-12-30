@@ -36,6 +36,24 @@
     list-style: none;
     line-height: 1.5;
   }
+
+  .quantity{
+    border-radius: 7px;
+    background: #F0F2F2;
+    box-shadow: 0 2px 5px rgba(15,17,17,.15);
+  }
+
+  .remove-button {
+    background-color: #4b0983;
+    color: red;
+    border: none;
+    /* border-radius: 20px; */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0px 10px;
+  }
   
   /* Product image styles */
   .card img {
