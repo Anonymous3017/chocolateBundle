@@ -31,38 +31,26 @@
         }
       });
     });
-    // addToCartButtons.forEach(button => {
-    //     button.addEventListener('click', () => {
-    //       if (totalItems < maxItems) {
-            
-    //       } else {
-    //         errorMessage.textContent = 'Maximum items reached (8)';
-    
-    //         alert('You cannot add more than 8 items to your bundle.');
-    
-    //       }
-    //     });
-    //   });
 
-        
-        const modal = document.getElementById('myModal');
-        const closeButton = document.querySelector('.close');
-      
-        addToCartButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            if (totalItems < maxItems) {
-              // ... (existing code for adding items)
-            } else {
-              errorMessage.textContent = 'Maximum items reached (8)';
-              modal.style.display = 'block'; // Display the modal
-            }
-          });
+      const modal = document.getElementById('myModal');
+      const closeButton = document.querySelector('.close');
+    
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (totalItems < maxItems) {
+            // ... (existing code for adding items)
+          } else {
+            errorMessage.textContent = 'Maximum items reached (8)';
+            modal.style.display = 'block'; // Display the modal
+          }
         });
+      });
       
-        closeButton.addEventListener('click', () => {
-          modal.style.display = 'none'; // Hide the modal
-        });
-      };
+    
+      closeButton.addEventListener('click', () => {
+        modal.style.display = 'none'; // Hide the modal
+      });
+    };
       
       addButtonListeners();
       
